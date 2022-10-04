@@ -1,1 +1,12 @@
-[{"id":"acfe7fa0-8007-43c5-8688-6c302d755a33","name":"Ms. Lynda Abernathy","age":25},{"id":"a27875c2-ed47-4eec-8d0f-9968d32fa527","name":"Tommy Casper","age":42}]
+[
+  {
+    "id": "acfe7fa0-8007-43c5-8688-6c302d755a33",
+    "name": "Ms. Lynda Abernathy",
+    "age": 25
+  },
+  {
+    "id": "a27875c2-ed47-4eec-8d0f-9968d32fa527",
+    "name": "Tommy Casper",
+    "age": 42
+  }
+]

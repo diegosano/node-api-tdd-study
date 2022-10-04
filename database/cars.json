@@ -1,1 +1,16 @@
-[{"id":"403db941-edfb-4dd5-9b21-0da3087f1625","name":"A8","releaseYear":"2022-05-16T12:07:06.368Z","available":true,"gasAvailable":true},{"id":"c880ae55-9bf8-4cf1-9667-c4bc96a73ca4","name":"Model X","releaseYear":"2022-08-30T02:02:59.765Z","available":true,"gasAvailable":true}]
+[
+  {
+    "id": "403db941-edfb-4dd5-9b21-0da3087f1625",
+    "name": "A8",
+    "releaseYear": "2022-05-16T12:07:06.368Z",
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "c880ae55-9bf8-4cf1-9667-c4bc96a73ca4",
+    "name": "Model X",
+    "releaseYear": "2022-08-30T02:02:59.765Z",
+    "available": true,
+    "gasAvailable": true
+  }
+]
