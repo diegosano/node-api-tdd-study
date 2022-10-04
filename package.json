@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
+    "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
     "sinon": "^14.0.1"
