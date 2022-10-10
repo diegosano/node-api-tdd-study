@@ -30,10 +30,10 @@ class Api {
         response.end(JSON.stringify({ result: finalPrice }));
       }
     } catch (error) {
-      console.log(error)
-      response.writeHead(500, DEFAULT_HEADERS)
-      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }))
-      response.end()
+      console.log(error);
+      response.writeHead(500, DEFAULT_HEADERS);
+      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }));
+      response.end();
     }
   }
 
@@ -42,17 +42,19 @@ class Api {
       for await (const data of request) {
         const { carCategory } = JSON.parse(data);
 
-        const availableCars = await this.carService.getAvailableCar(carCategory);
+        const availableCars = await this.carService.getAvailableCar(
+          carCategory
+        );
 
         response.writeHead(200, DEFAULT_HEADERS);
         response.write(JSON.stringify({ result: availableCars }));
         response.end();
       }
     } catch (error) {
-      console.log(error)
-      response.writeHead(500, DEFAULT_HEADERS)
-      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }))
-      response.end()
+      console.log(error);
+      response.writeHead(500, DEFAULT_HEADERS);
+      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }));
+      response.end();
     }
   }
 
@@ -61,17 +63,21 @@ class Api {
       for await (const data of request) {
         const { customer, carCategory, numberOfDays } = JSON.parse(data);
 
-        const result = await this.carService.rent(customer, carCategory, numberOfDays);
+        const result = await this.carService.rent(
+          customer,
+          carCategory,
+          numberOfDays
+        );
 
         response.writeHead(200, DEFAULT_HEADERS);
         response.write(JSON.stringify({ result }));
         response.end();
       }
     } catch (error) {
-      console.log(error)
-      response.writeHead(500, DEFAULT_HEADERS)
-      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }))
-      response.end()
+      console.log(error);
+      response.writeHead(500, DEFAULT_HEADERS);
+      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }));
+      response.end();
     }
   }
 
@@ -81,8 +87,8 @@ class Api {
       '/get-available-car:get': this.getAvailableCar.bind(this),
       '/rent:post': this.rent.bind(this),
       default: (request, response) => {
-        response.write(JSON.stringify({ success: 'Hello World!' }));
-        return response.end();
+        response.writeHead(404, DEFAULT_HEADERS);
+        response.end();
       },
     };
   }
