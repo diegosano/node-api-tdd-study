@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npx mocha -w --parallel **/**/*.test.js",
-    "coverage": "npx nyc mocha --parallel **/**/*.test.js",
+    "test": "cross-env NODE_ENV=test npx mocha -w --parallel **/**/*.test.js",
+    "coverage": "cross-env NODE_ENV=test npx nyc mocha --parallel **/**/*.test.js",
     "seed": "node ./seed"
   },
   "keywords": [],
@@ -17,8 +17,10 @@
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
     "chai": "^4.3.6",
+    "cross-env": "^7.0.3",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
-    "sinon": "^14.0.1"
+    "sinon": "^14.0.1",
+    "supertest": "^6.3.0"
   }
 }
