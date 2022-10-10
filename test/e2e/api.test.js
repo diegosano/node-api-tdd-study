@@ -124,7 +124,9 @@ describe('E2E API Suite Tests', () => {
       });
 
       expect(response.status).to.be.equal(200);
-      expect(Object.keys(response.body)).to.be.deep.equal(Object.keys(expected));
+      expect(Object.keys(response.body)).to.be.deep.equal(
+        Object.keys(expected)
+      );
 
       const { result } = response.body;
       const expectedCustomer = new Customer(result.customer);
@@ -134,6 +136,14 @@ describe('E2E API Suite Tests', () => {
       expect(result.car).to.be.deep.eq(expectedCar);
       expect(result.amount).to.not.be.empty;
       expect(result.dueDate).to.not.be.empty;
+    });
+  });
+
+  describe('/invalid-route', () => {
+    it('should return a 404 status code', async () => {
+      const response = await request(app.server).get('/invalid-route');
+
+      expect(response.status).to.be.equal(404);
     });
   });
 });
