@@ -4,6 +4,8 @@ const { join } = require('node:path');
 const { expect } = require('chai');
 
 const CarService = require('../../src/service/carService');
+const Car = require('../../src/entities/car');
+const Customer = require('../../src/entities/customer');
 
 const carsDatabase = join(__dirname, '..', '..', 'database', 'cars.json');
 
@@ -70,18 +72,17 @@ describe('E2E API Suite Tests', () => {
     });
   });
 
-  
   describe('/get-available-car:get', () => {
     it('should list all available car given a category', async () => {
       const car = mocks.validCar;
       const carCategory = {
         ...mocks.validCarCategory,
-        carIds: [car.id]
-    }
+        carIds: [car.id],
+      };
 
       const expected = {
-        result: car
-      }
+        result: car,
+      };
 
       const response = await request(app.server)
         .get('/get-available-car')
@@ -89,6 +90,50 @@ describe('E2E API Suite Tests', () => {
 
       expect(response.status).to.be.equal(200);
       expect(response.body).to.be.deep.equal(expected);
+    });
+  });
+
+  describe('/rent:post', () => {
+    it('should rent a car given a customer and a car category', async () => {
+      const car = mocks.validCar;
+      const carCategory = {
+        ...mocks.validCarCategory,
+        carIds: [car.id],
+      };
+
+      const customer = {
+        ...mocks.validCustomer,
+        age: 50,
+      };
+
+      const numberOfDays = 5;
+
+      const expected = {
+        result: {
+          car,
+          customer,
+          amount: 0,
+          dueDate: new Date(),
+        },
+      };
+
+      const response = await request(app.server).post('/rent').send({
+        customer,
+        carCategory,
+        numberOfDays,
+      });
+
+      expect(response.status).to.be.equal(200);
+      expect(Object.keys(response.body)).to.be.deep.equal(Object.keys(expected));
+
+      const { result } = response.body;
+      const expectedCustomer = new Customer(result.customer);
+      const expectedCar = new Car(result.car);
+
+      expect(result.customer).to.be.deep.eq(expectedCustomer);
+      expect(result.car).to.be.deep.eq(expectedCar);
+      expect(result.amount).to.not.be.empty;
+      expect(result.dueDate).to.not.be.empty;
     });
   });
 });
