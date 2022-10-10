@@ -29,7 +29,8 @@ class Api {
         response.writeHead(200, DEFAULT_HEADERS);
         response.end(JSON.stringify({ result: finalPrice }));
       }
-    } catch {
+    } catch (error) {
+      console.log(error)
       response.writeHead(500, DEFAULT_HEADERS)
       response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }))
       response.end()
@@ -55,10 +56,30 @@ class Api {
     }
   }
 
+  async rent(request, response) {
+    try {
+      for await (const data of request) {
+        const { customer, carCategory, numberOfDays } = JSON.parse(data);
+
+        const result = await this.carService.rent(customer, carCategory, numberOfDays);
+
+        response.writeHead(200, DEFAULT_HEADERS);
+        response.write(JSON.stringify({ result }));
+        response.end();
+      }
+    } catch (error) {
+      console.log(error)
+      response.writeHead(500, DEFAULT_HEADERS)
+      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }))
+      response.end()
+    }
+  }
+
   generateRoutes() {
     return {
       '/calculate-final-price:post': this.calculateFinalPrice.bind(this),
       '/get-available-car:get': this.getAvailableCar.bind(this),
+      '/rent:post': this.rent.bind(this),
       default: (request, response) => {
         response.write(JSON.stringify({ success: 'Hello World!' }));
         return response.end();
