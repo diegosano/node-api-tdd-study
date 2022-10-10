@@ -44,7 +44,7 @@ And a car model that costs $37.6 per day
 
 And a delivery date that is for 05 days behind
 
-And given an actual date 05/11/2020
+And given an actual date 05/11/2022
 
 When I rent a car I should see the customer data
 
