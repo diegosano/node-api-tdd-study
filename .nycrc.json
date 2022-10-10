@@ -5,5 +5,5 @@
   "statements": 100,
   "checkCoverage": true,
   "reporter": ["html", "json"],
-  "exclude": ["src/repository/base.js", "node_modules/*"]
+  "exclude": ["src/repository/base/*.js", "node_modules/*"]
 }
