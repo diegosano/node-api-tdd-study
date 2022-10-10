@@ -36,9 +36,29 @@ class Api {
     }
   }
 
+  async getAvailableCar(request, response) {
+    try {
+      for await (const data of request) {
+        const { carCategory } = JSON.parse(data);
+
+        const availableCars = await this.carService.getAvailableCar(carCategory);
+
+        response.writeHead(200, DEFAULT_HEADERS);
+        response.write(JSON.stringify({ result: availableCars }));
+        response.end();
+      }
+    } catch (error) {
+      console.log(error)
+      response.writeHead(500, DEFAULT_HEADERS)
+      response.write(JSON.stringify({ error: 'Ops! Something went wrong.' }))
+      response.end()
+    }
+  }
+
   generateRoutes() {
     return {
       '/calculate-final-price:post': this.calculateFinalPrice.bind(this),
+      '/get-available-car:get': this.getAvailableCar.bind(this),
       default: (request, response) => {
         response.write(JSON.stringify({ success: 'Hello World!' }));
         return response.end();
