@@ -69,4 +69,26 @@ describe('E2E API Suite Tests', () => {
       expect(response.body).to.be.deep.equal(expectedResponse);
     });
   });
+
+  
+  describe('/get-available-car:get', () => {
+    it('should list all available car given a category', async () => {
+      const car = mocks.validCar;
+      const carCategory = {
+        ...mocks.validCarCategory,
+        carIds: [car.id]
+    }
+
+      const expected = {
+        result: car
+      }
+
+      const response = await request(app.server)
+        .get('/get-available-car')
+        .send({ carCategory });
+
+      expect(response.status).to.be.equal(200);
+      expect(response.body).to.be.deep.equal(expected);
+    });
+  });
 });
